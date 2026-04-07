@@ -1,24 +1,15 @@
 import { Hono } from 'hono'
+import { logger } from 'hono/logger'
+import recruitment from './modules/recruitment'
 
-// Definisikan tipe untuk Bindings agar TypeScript tidak protes
-type Bindings = {
-  DB: D1Database
-}
+const app = new Hono<{ Bindings: { DB: D1Database } }>()
 
-const app = new Hono<{ Bindings: Bindings }>()
+// Middleware biar kita bisa lihat log request di terminal
+app.use('*', logger())
 
-app.get('/', (c) => {
-  return c.text('Portal HRGA API is Online!')
-})
+app.get('/', (c) => c.text('HRGA Portal API v1.0 - Ready to go!'))
 
-// Endpoint Testing untuk melihat daftar departemen
-app.get('/depts', async (c) => {
-  try {
-    const { results } = await c.env.DB.prepare("SELECT * FROM departments").all();
-    return c.json(results);
-  } catch (e) {
-    return c.json({ error: e.message }, 500);
-  }
-})
+// Pasang modul-modul di sini (Grouping)
+app.route('/api/recruitment', recruitment)
 
 export default app
