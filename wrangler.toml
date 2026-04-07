@@ -2,10 +2,16 @@ name = "hrga"
 main = "src/index.ts"
 compatibility_date = "2026-04-07"
 
+# Variabel Environment (Rahasia JWT)
 [vars]
 JWT_SECRET = "rahasia-balikpapan-paling-aman-123"
 
+# Konfigurasi Database D1
 [[d1_databases]]
 binding = "DB"
 database_name = "hrga-db"
 database_id = "d9f80e75-964c-4875-9145-8d7bb72791aa"
+
+# Optimization (Opsional agar build lebih kecil)
+[build]
+command = "bun install"
