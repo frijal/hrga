@@ -3,6 +3,9 @@
   "name": "hrga",
   "main": "src/index.ts",
   "compatibility_date": "2026-04-07",
+  "vars": {
+    "JWT_SECRET": "rahasia-balikpapan-paling-aman-123"
+  },
   "d1_databases": [
     {
       "binding": "DB",
