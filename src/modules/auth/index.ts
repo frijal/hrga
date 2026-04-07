@@ -35,7 +35,8 @@ auth.post('/login', async (c) => {
     exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24) // Expired dalam 24 jam
   }
 
-  const token = await sign(payload, c.env.JWT_SECRET)
+// Di dalam endpoint /login, bagian generate token:
+const token = await sign(payload, c.env.JWT_SECRET, 'HS256') // Tambahkan 'HS256' di sini
 
   return c.json({
     message: 'Login Berhasil',

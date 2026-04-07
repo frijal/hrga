@@ -30,10 +30,10 @@ app.get('/', (c) => {
 app.route('/auth', auth)
 
 // --- 3. PROTECTED ROUTES (API LAYER) ---
-// Middleware JWT: Semua rute yang diawali /api/* wajib membawa Token Valid di Header
 app.use('/api/*', async (c, next) => {
   const authMiddleware = jwt({
     secret: c.env.JWT_SECRET,
+    alg: 'HS256' // Tambahkan baris ini!
   })
   return authMiddleware(c, next)
 })
