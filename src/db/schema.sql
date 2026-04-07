@@ -26,15 +26,11 @@ CREATE TABLE employees (
 -- 2. RECRUITMENT MODULE (FTS5)
 -- ==========================================
 CREATE VIRTUAL TABLE recruitment_fts USING fts5(
-    candidate_id UNINDEXED,
-    full_name,
-    skills,
-    experience_summary,
-    expected_position,
-    content='employees', -- Optional: bisa link ke table asli
-    tokenize='porter' -- Biar pencarian lebih "pintar" (root words)
+  full_name,
+  position_applied,
+  content='recruitment',
+  content_rowid='id'
 );
-
 -- ==========================================
 -- 3. ATTENDANCE & LEAVE MODULE
 -- ==========================================
